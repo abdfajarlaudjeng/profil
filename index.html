@@ -30,20 +30,14 @@
         .card::before {
             content: "";
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 0; left: 0; right: 0;
             height: 6px;
             background-color: #4285F4;
         }
 
-        .header-top {
-            padding: 35px 20px 10px;
-        }
+        .header-top { padding: 35px 20px 10px; }
 
-        .profile-section {
-            padding: 10px 20px 20px;
-        }
+        .profile-section { padding: 10px 20px 10px; }
 
         .greeting {
             color: #1a73e8;
@@ -70,23 +64,14 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            /* 'center 25%' menggeser foto ke bawah. Semakin besar angkanya, semakin turun fotonya */
             object-position: center 25%;
-            /* Scale diturunkan ke 0.8 agar jarak ke tepi lebih lebar */
             transform: scale(0.8); 
             border-radius: 50%;
         }
 
-        h1 {
-            color: #202124;
-            font-size: 1.6rem;
-            margin: 5px 0;
-            font-weight: 700;
-        }
+        h1 { color: #202124; font-size: 1.6rem; margin: 5px 0; font-weight: 700; }
 
-        .info-box {
-            padding: 0 30px 40px;
-        }
+        .info-box { padding: 0 30px 20px; }
 
         .school {
             color: #5f6368;
@@ -100,26 +85,86 @@
         .email {
             color: #1a73e8;
             text-decoration: none;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             background: #f1f3f4;
-            padding: 10px 20px;
-            border-radius: 25px;
+            padding: 8px 18px;
+            border-radius: 20px;
             display: inline-block;
-            transition: all 0.3s ease;
-            border: 1px solid transparent;
+            margin-bottom: 20px;
         }
 
-        .email:hover {
-            background: #e8f0fe;
-            border: 1px solid #d2e3fc;
-            transform: translateY(-2px);
-        }
-
-        .footer-line {
-            height: 6px;
+        .menu-container {
             display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 0 40px 30px;
         }
 
+        .menu-item {
+            cursor: pointer;
+            text-decoration: none;
+            color: #3c4043;
+            background-color: #fff;
+            border: 1px solid #dadce0;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .menu-item:hover {
+            background-color: #f8f9fa;
+            border-color: #4285F4;
+            color: #1a73e8;
+        }
+
+        /* MODAL STYLES */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(32, 33, 36, 0.6);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .sub-card {
+            background: white;
+            width: 85%;
+            max-width: 350px;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: left;
+            position: relative;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .sub-card h3 { margin-top: 0; color: #1a73e8; border-bottom: 2px solid #f1f3f4; padding-bottom: 10px; }
+        .sub-card p { font-size: 0.9rem; color: #5f6368; line-height: 1.6; }
+        .sub-card a { color: #1a73e8; text-decoration: none; font-weight: 500; }
+
+        .btn-close {
+            background: #4285F4;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            float: right;
+            margin-top: 15px;
+        }
+
+        .footer-line { height: 6px; display: flex; }
         .f-blue { background: #4285F4; flex: 1; }
         .f-red { background: #EA4335; flex: 1; }
         .f-yellow { background: #FBBC05; flex: 1; }
@@ -150,13 +195,63 @@
             </a>
         </div>
 
+        <div class="menu-container">
+            <div class="menu-item" onclick="openModal('modalProfil')">👤 Profil Saya</div>
+            <div class="menu-item" onclick="openModal('modalAktivitas')">📑 Aktivitas</div>
+            <div class="menu-item" onclick="openModal('modalKontak')">📞 Informasi Kontak</div>
+        </div>
+
         <div class="footer-line">
-            <div class="f-blue"></div>
-            <div class="f-red"></div>
-            <div class="f-yellow"></div>
-            <div class="f-green"></div>
+            <div class="f-blue"></div><div class="f-red"></div><div class="f-yellow"></div><div class="f-green"></div>
         </div>
     </div>
+
+    <div id="modalProfil" class="modal-overlay" onclick="closeModal(event, 'modalProfil')">
+        <div class="sub-card">
+            <h3>Detail Profil</h3>
+            <p><strong>Nama:</strong> Abd. Fajar Laudjeng</p>
+            <p><strong>Jabatan:</strong> Guru / Pendidik</p>
+            <p><strong>Instansi:</strong> SMP NEGERI 10 BANAWA SELATAN</p>
+            <p><strong>Visi:</strong> Mengintegrasikan teknologi Google for Education dalam pembelajaran aktif.</p>
+            <button class="btn-close" onclick="toggleModal('modalProfil', false)">Tutup</button>
+        </div>
+    </div>
+
+    <div id="modalAktivitas" class="modal-overlay" onclick="closeModal(event, 'modalAktivitas')">
+        <div class="sub-card">
+            <h3>Aktivitas Terbaru</h3>
+            <p>• Pelatihan Google Workspace for Education.</p>
+            <p>• Digitalisasi Administrasi Kelas.</p>
+            <p>• Pendampingan Pemanfaatan Akun Belajar.id.</p>
+            <button class="btn-close" onclick="toggleModal('modalAktivitas', false)">Tutup</button>
+        </div>
+    </div>
+
+    <div id="modalKontak" class="modal-overlay" onclick="closeModal(event, 'modalKontak')">
+        <div class="sub-card">
+            <h3>Hubungi Saya</h3>
+            <p><strong>WhatsApp / Telp:</strong> <br> <a href="tel:+6281354349957">+62 813-5434-9957</a></p>
+            <p><strong>Email Instansi:</strong> <br> <a href="mailto:abd.fajar81@guru.smp.belajar.id">abd.fajar81@guru.smp.belajar.id</a></p>
+            <p><strong>Lokasi:</strong> Banawa Selatan, Sulawesi Tengah.</p>
+            <button class="btn-close" onclick="toggleModal('modalKontak', false)">Tutup</button>
+        </div>
+    </div>
+
+    <script>
+        function openModal(id) {
+            document.getElementById(id).style.display = 'flex';
+        }
+
+        function toggleModal(id, status) {
+            document.getElementById(id).style.display = status ? 'flex' : 'none';
+        }
+
+        function closeModal(event, id) {
+            if (event.target === document.getElementById(id)) {
+                document.getElementById(id).style.display = 'none';
+            }
+        }
+    </script>
 
 </body>
 </html>

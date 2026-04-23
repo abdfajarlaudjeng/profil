@@ -16,66 +16,54 @@
         .kop-instansi h3 { margin: 5px 0; font-size: 1.2rem; color: #1a73e8; }
         .kop-instansi p { margin: 0; font-size: 0.85rem; color: #5f6368; font-style: italic; }
 
-        /* Filter & Search */
-        .filter-container { width: 100%; max-width: 900px; margin-bottom: 20px; display: flex; gap: 10px; }
-        #searchInput { flex: 1; padding: 12px 20px; border-radius: 25px; border: 1px solid #dadce0; font-size: 1rem; outline: none; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-        #searchInput:focus { border-color: #4285F4; box-shadow: 0 1px 6px rgba(66,133,244,0.3); }
+        /* Filter Section */
+        .controls-container { width: 100%; max-width: 900px; margin-bottom: 25px; display: flex; flex-wrap: wrap; gap: 15px; background: white; padding: 15px; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        #searchInput { flex: 2; padding: 10px 20px; border-radius: 8px; border: 1px solid #dadce0; font-size: 1rem; outline: none; min-width: 250px; }
+        #filterKecamatan { flex: 1; padding: 10px; border-radius: 8px; border: 1px solid #dadce0; font-size: 1rem; background: white; cursor: pointer; min-width: 150px; }
 
         /* Card Layout */
         #container-profil { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; width: 100%; }
-        .card { background-color: white; width: 100%; max-width: 380px; border-radius: 12px; box-shadow: 0 1px 3px rgba(60,64,67,0.3), 0 4px 8px 3px rgba(60,64,67,0.15); overflow: hidden; text-align: center; position: relative; display: flex; flex-direction: column; }
+        .card { background-color: white; width: 100%; max-width: 350px; border-radius: 12px; box-shadow: 0 1px 3px rgba(60,64,67,0.3), 0 4px 8px 3px rgba(60,64,67,0.15); overflow: hidden; text-align: center; position: relative; display: flex; flex-direction: column; transition: transform 0.2s; }
+        .card:hover { transform: translateY(-5px); }
         .card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 6px; background-color: #4285F4; }
         
-        .header-top { padding: 25px 20px 10px; }
-
-        /* Perbaikan Ukuran Foto & Jarak */
+        /* Foto Peserta - Perbaikan Jarak */
         .img-container { 
-            width: 170px; 
-            height: 170px; 
-            margin: 0 auto 15px; 
+            width: 160px; height: 160px; 
+            margin: 30px auto 15px; 
             border-radius: 50%; 
             border: 4px solid #f1f3f4; 
             background-color: #ffffff; 
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 15px; /* JARAK AGAR FOTO TIDAK RAPAT KE LINGKARAN */
+            display: flex; justify-content: center; align-items: center; 
+            padding: 15px; /* Jarak agar kepala tidak rapat ke garis */
             box-sizing: border-box;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
-
-        .profile-img { 
-            width: 100%; 
-            height: 100%; 
-            object-fit: cover; 
-            border-radius: 50%; 
-        }
+        .profile-img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
         
-        h1 { color: #202124; font-size: 1.3rem; margin: 5px 0; padding: 0 15px; }
+        h1 { color: #202124; font-size: 1.25rem; margin: 5px 0; padding: 0 15px; }
         .jabatan { color: #1a73e8; font-weight: 700; font-size: 0.85rem; margin-bottom: 5px; }
         .school { color: #5f6368; font-size: 0.8rem; font-weight: 500; text-transform: uppercase; padding: 0 15px; }
-        .kecamatan-label { background: #e8f0fe; color: #1967d2; font-size: 0.75rem; padding: 4px 12px; border-radius: 15px; display: inline-block; margin-bottom: 15px; margin-top: 5px; }
+        .kec-label { display: inline-block; background: #e8f0fe; color: #1967d2; font-size: 0.75rem; padding: 4px 12px; border-radius: 15px; margin: 10px 0; font-weight: bold; }
         
         .menu-container { display: flex; flex-direction: column; gap: 8px; padding: 0 25px 25px; margin-top: auto; }
-        .menu-item { cursor: pointer; border: 1px solid #dadce0; padding: 10px; border-radius: 8px; font-size: 0.85rem; font-weight: 500; transition: 0.2s; background: #fff; text-decoration: none; color: #3c4043; }
+        .menu-item { cursor: pointer; border: 1px solid #dadce0; padding: 10px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; background: #fff; color: #3c4043; transition: 0.2s; }
         .menu-item:hover { background: #f8f9fa; border-color: #4285F4; color: #1a73e8; }
 
-        /* Pagination */
-        .pagination { margin: 30px 0; display: flex; gap: 10px; list-style: none; padding: 0; }
-        .pagination button { padding: 8px 16px; border-radius: 5px; border: 1px solid #dadce0; background: white; cursor: pointer; transition: 0.3s; }
+        /* Pagination Styles */
+        .pagination { margin: 30px 0; display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+        .pagination button { padding: 8px 14px; border-radius: 6px; border: 1px solid #dadce0; background: white; cursor: pointer; font-weight: 500; transition: 0.3s; }
         .pagination button.active { background: #4285F4; color: white; border-color: #4285F4; }
-        .pagination button:hover:not(.active) { background: #f1f3f4; }
+        .pagination button:disabled { opacity: 0.5; cursor: not-allowed; }
 
         /* Modal Styles */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(32, 33, 36, 0.7); display: none; justify-content: center; align-items: center; z-index: 1000; padding: 20px; }
-        .sub-card { background: white; width: 100%; max-width: 400px; padding: 25px; border-radius: 12px; animation: slideUp 0.3s; text-align: left; box-sizing: border-box; }
-        @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        .btn-close { background: #4285F4; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; float: right; margin-top: 15px; }
+        .sub-card { background: white; width: 100%; max-width: 400px; padding: 25px; border-radius: 12px; text-align: left; position: relative; }
+        .btn-close { background: #4285F4; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; float: right; margin-top: 15px; }
         
         .footer-line { height: 6px; display: flex; }
         .f-blue { background: #4285F4; flex: 1; } .f-red { background: #EA4335; flex: 1; } .f-yellow { background: #FBBC05; flex: 1; } .f-green { background: #34A853; flex: 1; }
-        #loading { margin: 20px; color: #5f6368; }
-        a { color: #1a73e8; text-decoration: none; }
+        #loading { margin: 20px; color: #5f6368; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -87,13 +75,17 @@
         <p>Alamat: Jalan Kenanga No. 01, Banawa, Kab. Donggala, Sulawesi Tengah</p>
     </div>
 
-    <h2 style="color: #3c4043; text-align: center; margin-bottom: 10px;">Peserta Pelatihan Level 0 Google Workspace for Education Tahun 2026</h2>
+    <h2 style="color: #3c4043; text-align: center; margin-bottom: 5px;">Peserta Pelatihan Level 0 Google Workspace for Education</h2>
+    <p style="margin-bottom: 20px; color: #5f6368;">Tahun Pelajaran 2026</p>
 
-    <div class="filter-container">
-        <input type="text" id="searchInput" placeholder="Cari nama, sekolah, atau kecamatan..." onkeyup="handleFilter()">
+    <div class="controls-container">
+        <input type="text" id="searchInput" placeholder="Cari Nama atau Sekolah..." onkeyup="updateFilter()">
+        <select id="filterKecamatan" onchange="updateFilter()">
+            <option value="">Semua Kecamatan</option>
+            </select>
     </div>
 
-    <div id="loading">Memuat data dari sistem...</div>
+    <div id="loading">Sinkronisasi Data Spreadsheet...</div>
     <div id="container-profil"></div>
     <div class="pagination" id="paginationControls"></div>
 
@@ -103,7 +95,7 @@
         let allData = [];
         let filteredData = [];
         let currentPage = 1;
-        const rowsPerPage = 50;
+        const rowsPerPage = 10; // Maksimal 10 Baris per Halaman
 
         function formatDriveLink(link) {
             if (link && link.includes('drive.google.com')) {
@@ -129,26 +121,53 @@
                 allData = rows.map(row => {
                     const cols = row.split(",");
                     return {
-                        nama: cols[0] || "",
-                        sekolah: cols[1] || "",
-                        email: cols[2] || "",
-                        alamat: cols[3] || "",
-                        kecamatan: cols[4] || "",
-                        hp: cols[5] || "",
-                        jabatan: cols[6] || "",
-                        misi: cols[7] || "",
-                        aktivitas: cols[8] || "",
-                        foto: cols[9] || ""
+                        nama: (cols[0] || "").trim(),
+                        sekolah: (cols[1] || "").trim(),
+                        email: (cols[2] || "").trim(),
+                        alamat: (cols[3] || "").trim(),
+                        kecamatan: (cols[4] || "").trim(),
+                        hp: (cols[5] || "").trim(),
+                        jabatan: (cols[6] || "").trim(),
+                        misi: (cols[7] || "").trim(),
+                        aktivitas: (cols[8] || "").trim(),
+                        foto: (cols[9] || "").trim()
                     };
-                }).filter(item => item.nama.trim() !== "");
+                }).filter(item => item.nama !== "");
 
+                populateKecamatan(allData);
                 filteredData = [...allData];
                 document.getElementById("loading").style.display = "none";
                 renderCards();
             } catch (e) {
-                document.getElementById("loading").innerText = "Gagal memuat database.";
-                console.error(e);
+                document.getElementById("loading").innerText = "Gagal terhubung ke database.";
             }
+        }
+
+        function populateKecamatan(data) {
+            const select = document.getElementById("filterKecamatan");
+            const listKecamatan = [...new Set(data.map(d => d.kecamatan))].sort();
+            listKecamatan.forEach(kec => {
+                if(kec) {
+                    const opt = document.createElement("option");
+                    opt.value = kec;
+                    opt.innerText = kec;
+                    select.appendChild(opt);
+                }
+            });
+        }
+
+        function updateFilter() {
+            const searchVal = document.getElementById("searchInput").value.toLowerCase();
+            const kecVal = document.getElementById("filterKecamatan").value;
+
+            filteredData = allData.filter(d => {
+                const matchSearch = d.nama.toLowerCase().includes(searchVal) || d.sekolah.toLowerCase().includes(searchVal);
+                const matchKec = kecVal === "" || d.kecamatan === kecVal;
+                return matchSearch && matchKec;
+            });
+
+            currentPage = 1;
+            renderCards();
         }
 
         function renderCards() {
@@ -157,66 +176,64 @@
             
             const start = (currentPage - 1) * rowsPerPage;
             const end = start + rowsPerPage;
-            const paginatedItems = filteredData.slice(start, end);
+            const currentItems = filteredData.slice(start, end);
 
-            if (paginatedItems.length === 0) {
-                container.innerHTML = "<p>Data tidak ditemukan.</p>";
+            if (currentItems.length === 0) {
+                container.innerHTML = "<p style='color:#5f6368'>Data tidak ditemukan untuk kriteria ini.</p>";
                 renderPagination(0);
                 return;
             }
 
-            paginatedItems.forEach((data, index) => {
-                const globalIndex = start + index;
-                const aktivitasList = data.aktivitas.split(";").map(a => `• ${a.trim()}`).join("<br>");
-                const imgURL = data.foto ? formatDriveLink(data.foto.trim()) : `https://ui-avatars.com/api/?name=${data.nama}&background=random&size=200`;
+            currentItems.forEach((data, index) => {
+                const realIndex = start + index;
+                const aktivitasHTML = data.aktivitas.split(";").map(a => `• ${a.trim()}`).join("<br>");
+                const finalImg = data.foto ? formatDriveLink(data.foto) : `https://ui-avatars.com/api/?name=${data.nama}&background=random&size=250`;
 
                 const cardHTML = `
                     <div class="card">
                         <div class="header-top">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/3/32/Google_for_Education_logo.svg" width="90">
                         </div>
-                        <div class="profile-section">
-                            <div class="img-container">
-                                <img src="${imgURL}" class="profile-img" onerror="this.src='https://ui-avatars.com/api/?name=${data.nama}&background=random&size=200'">
-                            </div>
-                            <h1>${data.nama}</h1>
-                            <div class="jabatan">${data.jabatan}</div>
-                            <div class="school">${data.sekolah}</div>
-                            <div class="kecamatan-label">📍 Kec. ${data.kecamatan}</div>
+                        <div class="img-container">
+                            <img src="${finalImg}" class="profile-img" onerror="this.src='https://ui-avatars.com/api/?name=${data.nama}&background=random&size=250'">
                         </div>
+                        <h1>${data.nama}</h1>
+                        <div class="jabatan">${data.jabatan}</div>
+                        <div class="school">${data.sekolah}</div>
+                        <div><span class="kec-label">Kec. ${data.kecamatan}</span></div>
+                        
                         <div class="menu-container">
-                            <div class="menu-item" onclick="openModal('m-profil${globalIndex}')">👤 Profil & Visi</div>
-                            <div class="menu-item" onclick="openModal('m-aktif${globalIndex}')">📑 Aktivitas</div>
-                            <div class="menu-item" onclick="openModal('m-kontak${globalIndex}')">📞 Kontak</div>
+                            <div class="menu-item" onclick="openModal('m-profil${realIndex}')">👤 Profil & Visi</div>
+                            <div class="menu-item" onclick="openModal('m-aktif${realIndex}')">📑 Aktivitas</div>
+                            <div class="menu-item" onclick="openModal('m-kontak${realIndex}')">📞 Kontak</div>
                         </div>
                         <div class="footer-line">
                             <div class="f-blue"></div><div class="f-red"></div><div class="f-yellow"></div><div class="f-green"></div>
                         </div>
 
-                        <div id="m-profil${globalIndex}" class="modal-overlay" onclick="closeModal(event, 'm-profil${globalIndex}')">
+                        <div id="m-profil${realIndex}" class="modal-overlay" onclick="closeModal(event, 'm-profil${realIndex}')">
                             <div class="sub-card">
-                                <h3>Detail Profil</h3>
-                                <p><strong>Jabatan:</strong> ${data.jabatan}</p>
+                                <h3>Detail Peserta</h3>
                                 <p><strong>Instansi:</strong> ${data.sekolah}</p>
                                 <p><strong>Kecamatan:</strong> ${data.kecamatan}</p>
-                                <p><strong>Visi/Misi:</strong> ${data.misi}</p>
-                                <button class="btn-close" onclick="closeModalDirect('m-profil${globalIndex}')">Tutup</button>
+                                <p><strong>Misi:</strong> ${data.misi}</p>
+                                <button class="btn-close" onclick="closeModalDirect('m-profil${realIndex}')">Tutup</button>
                             </div>
                         </div>
-                        <div id="m-aktif${globalIndex}" class="modal-overlay" onclick="closeModal(event, 'm-aktif${globalIndex}')">
+                        <div id="m-aktif${realIndex}" class="modal-overlay" onclick="closeModal(event, 'm-aktif${realIndex}')">
                             <div class="sub-card">
                                 <h3>Aktivitas Pelatihan</h3>
-                                <p>${aktivitasList || "Belum ada aktivitas."}</p>
-                                <button class="btn-close" onclick="closeModalDirect('m-aktif${globalIndex}')">Tutup</button>
+                                <p>${aktivitasHTML || "Belum ada aktivitas tercatat."}</p>
+                                <button class="btn-close" onclick="closeModalDirect('m-aktif${realIndex}')">Tutup</button>
                             </div>
                         </div>
-                        <div id="m-kontak${globalIndex}" class="modal-overlay" onclick="closeModal(event, 'm-kontak${globalIndex}')">
+                        <div id="m-kontak${realIndex}" class="modal-overlay" onclick="closeModal(event, 'm-kontak${realIndex}')">
                             <div class="sub-card">
-                                <h3>Informasi Kontak</h3>
-                                <p><strong>Email:</strong> <a href="mailto:${data.email}">${data.email}</a></p>
+                                <h3>Kontak & Alamat</h3>
                                 <p><strong>WhatsApp:</strong> <a href="https://wa.me/${data.hp.replace(/[^0-9]/g, '')}">${data.hp}</a></p>
+                                <p><strong>Email:</strong> ${data.email}</p>
                                 <p><strong>Alamat:</strong> ${data.alamat}</p>
-                                <button class="btn-close" onclick="closeModalDirect('m-kontak${globalIndex}')">Tutup</button>
+                                <button class="btn-close" onclick="closeModalDirect('m-kontak${realIndex}')">Tutup</button>
                             </div>
                         </div>
                     </div>
@@ -227,10 +244,10 @@
             renderPagination(filteredData.length);
         }
 
-        function renderPagination(totalItems) {
-            const controls = document.getElementById("paginationControls");
-            controls.innerHTML = "";
-            const pageCount = Math.ceil(totalItems / rowsPerPage);
+        function renderPagination(total) {
+            const wrapper = document.getElementById("paginationControls");
+            wrapper.innerHTML = "";
+            const pageCount = Math.ceil(total / rowsPerPage);
 
             if (pageCount <= 1) return;
 
@@ -243,19 +260,8 @@
                     renderCards();
                     window.scrollTo({top: 400, behavior: 'smooth'});
                 };
-                controls.appendChild(btn);
+                wrapper.appendChild(btn);
             }
-        }
-
-        function handleFilter() {
-            const term = document.getElementById("searchInput").value.toLowerCase();
-            filteredData = allData.filter(d => 
-                d.nama.toLowerCase().includes(term) || 
-                d.sekolah.toLowerCase().includes(term) || 
-                d.kecamatan.toLowerCase().includes(term)
-            );
-            currentPage = 1;
-            renderCards();
         }
 
         function openModal(id) { document.getElementById(id).style.display = 'flex'; }

@@ -3,20 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Database Peserta Pelatihan GWE 2026</title>
+    <title>DATA PESERTA PELATIHAN GOOGLE WORKSPACE FOR EDUCATION 2026</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
+        /* Dasar & Layout */
         body { font-family: 'Roboto', sans-serif; background-color: #f8f9fa; margin: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; padding: 20px; }
-        .kop-instansi { text-align: center; margin-bottom: 30px; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); width: 100%; max-width: 900px; box-sizing: border-box; }
-        .kop-instansi img { width: 75px; margin-bottom: 10px; }
+        
+        /* Kop Instansi - Logo Kiri */
+        .kop-instansi { 
+            display: flex; 
+            align-items: center; 
+            gap: 25px; 
+            text-align: left; 
+            margin-bottom: 30px; 
+            background: white; 
+            padding: 25px; 
+            border-radius: 12px; 
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1); 
+            width: 100%; 
+            max-width: 900px; 
+            box-sizing: border-box; 
+        }
+        .kop-instansi img { width: 85px; height: auto; }
+        .kop-text { flex: 1; }
         .kop-instansi h2 { margin: 0; font-size: 1.1rem; color: #202124; text-transform: uppercase; }
-        .kop-instansi h3 { margin: 5px 0; font-size: 1.3rem; color: #1a73e8; }
+        .kop-instansi h3 { margin: 3px 0; font-size: 1.3rem; color: #1a73e8; }
         .kop-instansi p { margin: 0; font-size: 0.85rem; color: #5f6368; font-style: italic; }
 
+        /* Controls */
         .controls-container { width: 100%; max-width: 900px; margin-bottom: 25px; display: flex; flex-wrap: wrap; gap: 15px; background: white; padding: 15px; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); box-sizing: border-box; }
         #searchInput { flex: 2; padding: 12px 20px; border-radius: 8px; border: 1px solid #dadce0; font-size: 1rem; outline: none; min-width: 250px; }
         #filterKecamatan { flex: 1; padding: 12px; border-radius: 8px; border: 1px solid #dadce0; font-size: 1rem; background: white; cursor: pointer; min-width: 150px; }
 
+        /* Card Layout */
         #container-profil { display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; width: 100%; max-width: 1200px; }
         .card { background-color: white; width: 100%; max-width: 340px; border-radius: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); overflow: hidden; text-align: center; position: relative; display: flex; flex-direction: column; transition: 0.3s; }
         .card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.12); }
@@ -34,10 +53,12 @@
         .menu-item { cursor: pointer; border: 1px solid #dadce0; padding: 10px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; background: #fff; color: #3c4043; transition: 0.2s; }
         .menu-item:hover { background: #f8f9fa; border-color: #4285F4; color: #1a73e8; }
 
+        /* Pagination */
         .pagination { margin: 40px 0; display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
         .pagination button { padding: 8px 16px; border-radius: 6px; border: 1px solid #dadce0; background: white; cursor: pointer; font-weight: bold; }
         .pagination button.active { background: #4285F4; color: white; border-color: #4285F4; }
 
+        /* Modal Detail */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); display: none; justify-content: center; align-items: center; z-index: 1000; padding: 20px; backdrop-filter: blur(3px); }
         .sub-card { background: white; width: 100%; max-width: 400px; padding: 25px; border-radius: 15px; text-align: left; box-shadow: 0 10px 25px rgba(0,0,0,0.2); position: relative; }
         .btn-close { color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; float: right; margin-top: 15px; font-weight: bold; }
@@ -45,18 +66,25 @@
         .footer-line { height: 6px; display: flex; }
         .f-blue { background: #4285F4; flex: 1; } .f-red { background: #EA4335; flex: 1; } .f-yellow { background: #FBBC05; flex: 1; } .f-green { background: #34A853; flex: 1; }
         #loading { margin: 50px; color: #5f6368; font-weight: bold; }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .kop-instansi { flex-direction: column; text-align: center; }
+        }
     </style>
 </head>
 <body>
 
     <div class="kop-instansi">
         <img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/Lambang_Kabupaten_Donggala_%282015-sekarang%29.png" alt="Logo">
-        <h2>Pemerintah Daerah Kabupaten Donggala</h2>
-        <h3>Dinas Pendidikan Pemuda dan Olahraga</h3>
-        <p>Alamat : Jl. Pue Mami No. Telp.(0457) 71461 Fax.71462 Donggala</p>
+        <div class="kop-text">
+            <h2>Pemerintah Daerah Kabupaten Donggala</h2>
+            <h3>DINAS PENDIDIKAN PEMUDA DAN OLAHRAGA</h3>
+            <p>Alamat : Jl. Pue Mami No. Telp.(0457) 71461 Fax.71462 Donggala</p>
+        </div>
     </div>
 
-    <h2 style="color: #3c4043; text-align: center; margin: 0 0 5px;">Database Peserta Pelatihan GWE 2026</h2>
+    <h2 style="color: #3c4043; text-align: center; margin: 0 0 5px;">BIODATA PESERTA PELATIHAN GOOGLE WORKSPACE FOR EDUCATION 2026</h2>
     <p style="margin-bottom: 25px; color: #5f6368;">Kabupaten Donggala - Level 0</p>
 
     <div class="controls-container">
@@ -66,7 +94,7 @@
         </select>
     </div>
 
-    <div id="loading">Menghubungkan ke Server Google...</div>
+    <div id="loading">Sinkronisasi Database...</div>
     <div id="container-profil"></div>
     <div class="pagination" id="paginationControls"></div>
 
@@ -79,7 +107,6 @@
         const rowsPerPage = 9;
         const googleColors = ['#4285F4', '#EA4335', '#FBBC05', '#34A853'];
 
-        // FUNGSI DRIVE: Menangani berbagai format link drive
         function formatDriveLink(link) {
             if (!link) return "";
             link = link.trim();
@@ -90,12 +117,12 @@
                 } else if (link.includes('/d/')) {
                     id = link.split('/d/')[1].split('/')[0];
                 }
-                return `https://lh3.googleusercontent.com/d/${id}=s1000`;
+                return `https://lh3.googleusercontent.com/d/$${id}=s1000`;
             }
             return link;
         }
 
-        // FUNGSI CSV PARSER: Memastikan koma di dalam kutip tidak memecah kolom
+        // CSV Parser Profesional: Menangani koma di dalam tanda kutip
         function parseCSV(text) {
             const result = [];
             let row = [];
@@ -134,7 +161,7 @@
             try {
                 const response = await fetch(sheetURL);
                 const csvText = await response.text();
-                const dataArray = parseCSV(csvText).slice(1); // Potong header
+                const dataArray = parseCSV(csvText).slice(1);
 
                 allData = dataArray.map(cols => ({
                     nama: (cols[0] || "").trim(),
@@ -154,7 +181,7 @@
                 document.getElementById("loading").style.display = "none";
                 renderCards();
             } catch (e) {
-                document.getElementById("loading").innerText = "Gagal memuat data. Periksa koneksi atau publikasi Sheet.";
+                document.getElementById("loading").innerText = "Gagal memuat data.";
             }
         }
 

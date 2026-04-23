@@ -22,8 +22,28 @@
         .card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 6px; background-color: #4285F4; }
         
         .header-top { padding: 25px 20px 10px; }
-        .img-container { width: 140px; height: 140px; margin: 0 auto 15px; border-radius: 50%; border: 4px solid #f8f9fa; box-shadow: 0 2px 6px rgba(0,0,0,0.1); overflow: hidden; background-color: #eee; }
-        .profile-img { width: 100%; height: 100%; object-fit: cover; }
+        .img-container { 
+            width: 140px; 
+            height: 140px; 
+            margin: 0 auto 15px; 
+            border-radius: 50%; 
+            border: 4px solid #f8f9fa; 
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1); 
+            overflow: hidden; 
+            background-color: #fff; /* Mengubah background jadi putih agar jeda terlihat bersih */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px; /* JEDA ANTARA GAMBAR DAN LINGKARAN */
+            box-sizing: border-box; 
+        }
+
+        .profile-img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: contain; /* Menggunakan contain agar seluruh wajah/kepala masuk dalam frame */
+            border-radius: 50%;
+        }
         
         h1 { color: #202124; font-size: 1.4rem; margin: 5px 0; }
         .jabatan { color: #1a73e8; font-weight: 700; font-size: 0.9rem; margin-bottom: 5px; }

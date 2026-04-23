@@ -6,6 +6,7 @@
     <title>Profil Peserta Pelatihan Google Workspace 2026</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
+        /* Dasar & Layout */
         body { font-family: 'Roboto', sans-serif; background-color: #f1f3f4; margin: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; padding: 20px; }
         #container-profil { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; width: 100%; }
         
@@ -22,27 +23,29 @@
         .card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 6px; background-color: #4285F4; }
         
         .header-top { padding: 25px 20px 10px; }
+
+        /* KUNCI: Jarak Foto & Lingkaran */
         .img-container { 
-            width: 150px; 
-            height: 150px; 
+            width: 160px; 
+            height: 160px; 
             margin: 0 auto 15px; 
-            border-radius: 50%; /* Membuat bingkai luar bulat */
-            border: 4px solid #f8f9fa; 
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1); 
-            background-color: #ffffff; /* Latar belakang putih di dalam lingkaran */
+            border-radius: 50%; 
+            border: 3px solid #e8eaed; /* Garis tipis lingkaran luar */
+            background-color: #ffffff; 
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 12px; /* Jeda batas kepala ke garis lingkaran */
-            box-sizing: border-box; 
-            overflow: hidden; 
+            padding: 15px; /* JARAK ANTARA FOTO DAN GARIS LINGKARAN */
+            box-sizing: border-box;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
         }
 
         .profile-img { 
             width: 100%; 
             height: 100%; 
-            object-fit: cover; /* Menyesuaikan foto agar mengisi ruang tengah */
-            border-radius: 50%; /* Membuat foto itu sendiri menjadi bulat */
+            object-fit: cover; 
+            border-radius: 50%; /* Membuat foto di dalam tetap bulat */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Shadow halus pada foto */
         }
         
         h1 { color: #202124; font-size: 1.4rem; margin: 5px 0; }
@@ -50,7 +53,7 @@
         .school { color: #5f6368; font-size: 0.85rem; font-weight: 500; margin-bottom: 15px; text-transform: uppercase; padding: 0 10px; }
         
         .menu-container { display: flex; flex-direction: column; gap: 8px; padding: 0 30px 30px; }
-        .menu-item { cursor: pointer; border: 1px solid #dadce0; padding: 10px; border-radius: 8px; font-size: 0.9rem; font-weight: 500; transition: 0.2s; background: #fff; text-decoration: none; color: #3c4043; }
+        .menu-item { cursor: pointer; border: 1px solid #dadce0; padding: 12px; border-radius: 8px; font-size: 0.9rem; font-weight: 500; transition: 0.2s; background: #fff; text-decoration: none; color: #3c4043; }
         .menu-item:hover { background: #f8f9fa; border-color: #4285F4; color: #1a73e8; }
 
         /* Modal Styles */
@@ -71,7 +74,7 @@
         <img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/Lambang_Kabupaten_Donggala_%282015-sekarang%29.png" alt="Logo Donggala">
         <h2>Pemerintah Daerah Kabupaten Donggala</h2>
         <h3>Dinas Pendidikan Pemuda dan Olahraga</h3>
-        <p>Alamat : Jl. Pue Mami  No.  Telp.(0457) 71461 Fax.71462  Donggala</p>
+        <p>Alamat: Jalan Kenanga No. 01, Banawa, Kab. Donggala, Sulawesi Tengah</p>
     </div>
 
     <h2 class="judul-halaman">Peserta Pelatihan Level 0 Google Workspace for Education Tahun 2026</h2>
@@ -89,8 +92,10 @@
                     id = link.split('id=')[1].split('&')[0];
                 } else {
                     const parts = link.split('/');
-                    id = parts[parts.indexOf('d') + 1];
+                    const dIndex = parts.indexOf('d');
+                    id = parts[dIndex + 1];
                 }
+                // Menggunakan format gambar profile Google untuk rendering lebih baik
                 return `https://lh3.googleusercontent.com/d/${id}`;
             }
             return link;
@@ -108,7 +113,6 @@
                 rows.forEach((row, i) => {
                     if (row.trim() === "") return;
                     
-                    // Pisahkan kolom
                     const cols = row.split(",");
                     
                     const nama = cols[0];
@@ -119,7 +123,7 @@
                     const jabatan = cols[5];
                     const misi = cols[6];
                     const aktivitas = cols[7] ? cols[7].split(";").map(a => `• ${a}`).join("<br>") : "";
-                    const fotoDrive = cols[8] ? formatDriveLink(cols[8].trim()) : `https://ui-avatars.com/api/?name=${nama}`;
+                    const fotoDrive = cols[8] ? formatDriveLink(cols[8].trim()) : `https://ui-avatars.com/api/?name=${nama}&background=random&size=200`;
 
                     const cardHTML = `
                         <div class="card">
@@ -128,8 +132,8 @@
                             </div>
                             <div class="profile-section">
                                 <div class="img-container">
-                                <img src="${fotoDrive}" class="profile-img" onerror="this.src='https://ui-avatars.com/api/?name=${nama}&background=random&size=160'">
-                            </div>
+                                    <img src="${fotoDrive}" class="profile-img" onerror="this.src='https://ui-avatars.com/api/?name=${nama}&background=random&size=200'">
+                                </div>
                                 <h1>${nama}</h1>
                                 <div class="jabatan">${jabatan}</div>
                                 <div class="school">${sekolah}</div>
@@ -174,6 +178,7 @@
                 });
             } catch (e) {
                 document.getElementById("loading").innerText = "Gagal memuat data.";
+                console.error(e);
             }
         }
 

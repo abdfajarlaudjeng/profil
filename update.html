@@ -6,54 +6,26 @@
     <title>Database Peserta Pelatihan GWE 2026</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
-        /* Dasar & Layout */
         body { font-family: 'Roboto', sans-serif; background-color: #f8f9fa; margin: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; padding: 20px; }
-        
-        /* Kop Instansi */
         .kop-instansi { text-align: center; margin-bottom: 30px; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); width: 100%; max-width: 900px; box-sizing: border-box; }
         .kop-instansi img { width: 75px; margin-bottom: 10px; }
         .kop-instansi h2 { margin: 0; font-size: 1.1rem; color: #202124; text-transform: uppercase; }
         .kop-instansi h3 { margin: 5px 0; font-size: 1.3rem; color: #1a73e8; }
         .kop-instansi p { margin: 0; font-size: 0.85rem; color: #5f6368; font-style: italic; }
 
-        /* Filter Section */
         .controls-container { width: 100%; max-width: 900px; margin-bottom: 25px; display: flex; flex-wrap: wrap; gap: 15px; background: white; padding: 15px; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); box-sizing: border-box; }
         #searchInput { flex: 2; padding: 12px 20px; border-radius: 8px; border: 1px solid #dadce0; font-size: 1rem; outline: none; min-width: 250px; }
         #filterKecamatan { flex: 1; padding: 12px; border-radius: 8px; border: 1px solid #dadce0; font-size: 1rem; background: white; cursor: pointer; min-width: 150px; }
 
-        /* Card Layout */
         #container-profil { display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; width: 100%; max-width: 1200px; }
         .card { background-color: white; width: 100%; max-width: 340px; border-radius: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); overflow: hidden; text-align: center; position: relative; display: flex; flex-direction: column; transition: 0.3s; }
         .card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.12); }
-        
         .header-google { padding: 20px 0 10px; }
 
-        /* FOTO PROFIL: Sesuai Permintaan Anda */
-        .img-container {
-            width: 160px;
-            height: 160px;
-            margin: 0 auto 15px;
-            border-radius: 50%;
-            /* Border default, akan ditimpa oleh inline style JS */
-            border: 4px solid #f8f9fa; 
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-            overflow: hidden;
-            background-color: #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .profile-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center 25%;
-            transform: scale(0.8); /* Memberikan jeda di dalam bulatan */
-            border-radius: 50%;
-        }
+        .img-container { width: 160px; height: 160px; margin: 0 auto 15px; border-radius: 50%; border: 4px solid #f8f9fa; box-shadow: 0 2px 6px rgba(0,0,0,0.1); overflow: hidden; background-color: #fff; display: flex; justify-content: center; align-items: center; }
+        .profile-img { width: 100%; height: 100%; object-fit: cover; object-position: center 25%; transform: scale(0.8); border-radius: 50%; }
         
-        h1 { color: #202124; font-size: 1.25rem; margin: 10px 0 5px; padding: 0 15px; min-height: 3.2rem; display: flex; align-items: center; justify-content: center; }
+        h1 { color: #202124; font-size: 1.15rem; margin: 10px 0 5px; padding: 0 15px; min-height: 3rem; display: flex; align-items: center; justify-content: center; line-height: 1.2; }
         .jabatan { color: #1a73e8; font-weight: 700; font-size: 0.85rem; margin-bottom: 3px; }
         .school { color: #5f6368; font-size: 0.8rem; font-weight: 500; text-transform: uppercase; padding: 0 15px; height: 2.4rem; overflow: hidden; }
         .kec-label { display: inline-block; background: #f1f3f4; color: #3c4043; font-size: 0.7rem; padding: 4px 12px; border-radius: 12px; margin: 10px 0 20px; font-weight: bold; }
@@ -62,15 +34,13 @@
         .menu-item { cursor: pointer; border: 1px solid #dadce0; padding: 10px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; background: #fff; color: #3c4043; transition: 0.2s; }
         .menu-item:hover { background: #f8f9fa; border-color: #4285F4; color: #1a73e8; }
 
-        /* Pagination */
         .pagination { margin: 40px 0; display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
-        .pagination button { padding: 8px 16px; border-radius: 6px; border: 1px solid #dadce0; background: white; cursor: pointer; }
-        .pagination button.active { background: #4285F4; color: white; border-color: #4285F4; font-weight: bold; }
+        .pagination button { padding: 8px 16px; border-radius: 6px; border: 1px solid #dadce0; background: white; cursor: pointer; font-weight: bold; }
+        .pagination button.active { background: #4285F4; color: white; border-color: #4285F4; }
 
-        /* Modal Detail */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); display: none; justify-content: center; align-items: center; z-index: 1000; padding: 20px; backdrop-filter: blur(3px); }
-        .sub-card { background: white; width: 100%; max-width: 400px; padding: 25px; border-radius: 15px; text-align: left; box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
-        .btn-close { background: #4285F4; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; float: right; margin-top: 15px; font-weight: bold; }
+        .sub-card { background: white; width: 100%; max-width: 400px; padding: 25px; border-radius: 15px; text-align: left; box-shadow: 0 10px 25px rgba(0,0,0,0.2); position: relative; }
+        .btn-close { color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; float: right; margin-top: 15px; font-weight: bold; }
         
         .footer-line { height: 6px; display: flex; }
         .f-blue { background: #4285F4; flex: 1; } .f-red { background: #EA4335; flex: 1; } .f-yellow { background: #FBBC05; flex: 1; } .f-green { background: #34A853; flex: 1; }
@@ -80,14 +50,14 @@
 <body>
 
     <div class="kop-instansi">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/Lambang_Kabupaten_Donggala_%282015-sekarang%29.png" alt="Logo Donggala">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/Lambang_Kabupaten_Donggala_%282015-sekarang%29.png" alt="Logo">
         <h2>Pemerintah Daerah Kabupaten Donggala</h2>
         <h3>Dinas Pendidikan Pemuda dan Olahraga</h3>
-        <p>Alamat : Jl. Pue Mami  No. Telp.(0457) 71461 Fax.71462  Donggala</p>
+        <p>Alamat : Jl. Pue Mami No. Telp.(0457) 71461 Fax.71462 Donggala</p>
     </div>
 
-    <h2 style="color: #3c4043; text-align: center; margin-bottom: 5px;">Peserta Pelatihan Level 0 Google Workspace for Education</h2>
-    <p style="margin-bottom: 25px; color: #5f6368;">Kabupaten Donggala - Tahun 2026</p>
+    <h2 style="color: #3c4043; text-align: center; margin: 0 0 5px;">Database Peserta Pelatihan GWE 2026</h2>
+    <p style="margin-bottom: 25px; color: #5f6368;">Kabupaten Donggala - Level 0</p>
 
     <div class="controls-container">
         <input type="text" id="searchInput" placeholder="Cari Nama atau Sekolah..." onkeyup="updateFilter()">
@@ -96,7 +66,7 @@
         </select>
     </div>
 
-    <div id="loading">Memuat Data Peserta...</div>
+    <div id="loading">Menghubungkan ke Server Google...</div>
     <div id="container-profil"></div>
     <div class="pagination" id="paginationControls"></div>
 
@@ -107,53 +77,84 @@
         let filteredData = [];
         let currentPage = 1;
         const rowsPerPage = 9;
-
-        // WARNA IDENTITAS GOOGLE
         const googleColors = ['#4285F4', '#EA4335', '#FBBC05', '#34A853'];
 
+        // FUNGSI DRIVE: Menangani berbagai format link drive
         function formatDriveLink(link) {
-            if (link && link.includes('drive.google.com')) {
+            if (!link) return "";
+            link = link.trim();
+            if (link.includes('drive.google.com')) {
                 let id = "";
                 if (link.includes('id=')) {
                     id = link.split('id=')[1].split('&')[0];
-                } else {
-                    const parts = link.split('/');
-                    const dIndex = parts.indexOf('d');
-                    id = parts[dIndex + 1];
+                } else if (link.includes('/d/')) {
+                    id = link.split('/d/')[1].split('/')[0];
                 }
-                return `https://lh3.googleusercontent.com/d/${id}`;
+                return `https://lh3.googleusercontent.com/d/${id}=s1000`;
             }
             return link;
+        }
+
+        // FUNGSI CSV PARSER: Memastikan koma di dalam kutip tidak memecah kolom
+        function parseCSV(text) {
+            const result = [];
+            let row = [];
+            let col = "";
+            let inQuotes = false;
+
+            for (let i = 0; i < text.length; i++) {
+                let char = text[i];
+                let nextChar = text[i+1];
+
+                if (char === '"' && inQuotes && nextChar === '"') {
+                    col += '"'; i++;
+                } else if (char === '"') {
+                    inQuotes = !inQuotes;
+                } else if (char === ',' && !inQuotes) {
+                    row.push(col); col = "";
+                } else if (char === '\r' || char === '\n') {
+                    if (inQuotes) {
+                        col += char;
+                    } else {
+                        if (col !== "" || row.length > 0) {
+                            row.push(col);
+                            result.push(row);
+                        }
+                        row = []; col = "";
+                    }
+                } else {
+                    col += char;
+                }
+            }
+            if (col !== "" || row.length > 0) { row.push(col); result.push(row); }
+            return result;
         }
 
         async function loadSheetsData() {
             try {
                 const response = await fetch(sheetURL);
-                const csvData = await response.text();
-                const rows = csvData.split("\n").slice(1);
-                
-                allData = rows.map(row => {
-                    const cols = row.split(",");
-                    return {
-                        nama: (cols[0] || "").trim(),
-                        sekolah: (cols[1] || "").trim(),
-                        email: (cols[2] || "").trim(),
-                        alamat: (cols[3] || "").trim(),
-                        kecamatan: (cols[4] || "").trim(),
-                        hp: (cols[5] || "").trim(),
-                        jabatan: (cols[6] || "").trim(),
-                        misi: (cols[7] || "").trim(),
-                        aktivitas: (cols[8] || "").trim(),
-                        foto: (cols[9] || "").trim()
-                    };
-                }).filter(item => item.nama !== "");
+                const csvText = await response.text();
+                const dataArray = parseCSV(csvText).slice(1); // Potong header
+
+                allData = dataArray.map(cols => ({
+                    nama: (cols[0] || "").trim(),
+                    sekolah: (cols[1] || "").trim(),
+                    email: (cols[2] || "").trim(),
+                    alamat: (cols[3] || "").trim(),
+                    kecamatan: (cols[4] || "").trim(),
+                    hp: (cols[5] || "").trim(),
+                    jabatan: (cols[6] || "").trim(),
+                    misi: (cols[7] || "").trim(),
+                    aktivitas: (cols[8] || "").trim(),
+                    foto: (cols[9] || "").trim()
+                })).filter(item => item.nama !== "");
 
                 populateKecamatan(allData);
                 filteredData = [...allData];
                 document.getElementById("loading").style.display = "none";
                 renderCards();
             } catch (e) {
-                document.getElementById("loading").innerText = "Gagal mengambil data.";
+                document.getElementById("loading").innerText = "Gagal memuat data. Periksa koneksi atau publikasi Sheet.";
             }
         }
 
@@ -191,16 +192,12 @@
             currentItems.forEach((data, index) => {
                 const globalIndex = start + index;
                 const aktivitasHTML = data.aktivitas.split(";").map(a => `• ${a.trim()}`).join("<br>");
-                const finalImg = data.foto ? formatDriveLink(data.foto) : `https://ui-avatars.com/api/?name=${data.nama}&background=random&size=200`;
-                
-                // Pilih warna border secara otomatis berdasarkan urutan
+                const finalImg = formatDriveLink(data.foto) || `https://ui-avatars.com/api/?name=${data.nama}&background=random&size=200`;
                 const borderColor = googleColors[globalIndex % googleColors.length];
 
                 const cardHTML = `
                     <div class="card">
-                        <div class="header-google">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/3/32/Google_for_Education_logo.svg" width="80">
-                        </div>
+                        <div class="header-google"><img src="https://upload.wikimedia.org/wikipedia/commons/3/32/Google_for_Education_logo.svg" width="80"></div>
                         <div class="img-container" style="border-color: ${borderColor}">
                             <img src="${finalImg}" class="profile-img" onerror="this.src='https://ui-avatars.com/api/?name=${data.nama}&background=random&size=200'">
                         </div>
@@ -208,7 +205,6 @@
                         <div class="jabatan">${data.jabatan}</div>
                         <div class="school">${data.sekolah}</div>
                         <div><span class="kec-label">KEC. ${data.kecamatan}</span></div>
-                        
                         <div class="menu-container">
                             <div class="menu-item" onclick="openModal('m-profil${globalIndex}')">👤 Profil & Visi</div>
                             <div class="menu-item" onclick="openModal('m-aktif${globalIndex}')">📑 Aktivitas</div>
@@ -217,11 +213,11 @@
                         <div class="footer-line">
                             <div class="f-blue"></div><div class="f-red"></div><div class="f-yellow"></div><div class="f-green"></div>
                         </div>
-
                         <div id="m-profil${globalIndex}" class="modal-overlay" onclick="closeModal(event, 'm-profil${globalIndex}')">
                             <div class="sub-card">
                                 <h3 style="color:${borderColor}">Detail Peserta</h3>
                                 <p><strong>Instansi:</strong> ${data.sekolah}</p>
+                                <p><strong>Jabatan:</strong> ${data.jabatan}</p>
                                 <p><strong>Kecamatan:</strong> ${data.kecamatan}</p>
                                 <p><strong>Visi/Misi:</strong> ${data.misi}</p>
                                 <button class="btn-close" style="background:${borderColor}" onclick="closeModalDirect('m-profil${globalIndex}')">Tutup</button>
@@ -230,15 +226,15 @@
                         <div id="m-aktif${globalIndex}" class="modal-overlay" onclick="closeModal(event, 'm-aktif${globalIndex}')">
                             <div class="sub-card">
                                 <h3 style="color:${borderColor}">Aktivitas Pelatihan</h3>
-                                <p>${aktivitasHTML || "-"}</p>
+                                <p>${aktivitasHTML || "Belum ada aktivitas terdaftar."}</p>
                                 <button class="btn-close" style="background:${borderColor}" onclick="closeModalDirect('m-aktif${globalIndex}')">Tutup</button>
                             </div>
                         </div>
                         <div id="m-kontak${globalIndex}" class="modal-overlay" onclick="closeModal(event, 'm-kontak${globalIndex}')">
                             <div class="sub-card">
-                                <h3 style="color:${borderColor}">Kontak & Alamat</h3>
+                                <h3 style="color:${borderColor}">Informasi Kontak</h3>
                                 <p><strong>Email:</strong> ${data.email}</p>
-                                <p><strong>WA:</strong> <a href="https://wa.me/${data.hp.replace(/[^0-9]/g, '')}" target="_blank">${data.hp}</a></p>
+                                <p><strong>WhatsApp:</strong> <a href="https://wa.me/${data.hp.replace(/[^0-9]/g, '')}" target="_blank">${data.hp}</a></p>
                                 <p><strong>Alamat:</strong> ${data.alamat}</p>
                                 <button class="btn-close" style="background:${borderColor}" onclick="closeModalDirect('m-kontak${globalIndex}')">Tutup</button>
                             </div>

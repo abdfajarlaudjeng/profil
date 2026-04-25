@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Input Data Pelatihan</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f4f7f6; padding: 40px 0; }
+        .form-container { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); max-width: 800px; margin: auto; }
+        .form-header { border-bottom: 2px solid #1a73e8; margin-bottom: 25px; padding-bottom: 10px; }
+        .btn-primary { background-color: #1a73e8; border: none; padding: 10px 25px; border-radius: 8px; font-weight: bold; }
+        .btn-primary:hover { background-color: #1557b0; }
+        label { font-weight: 500; color: #3c4043; }
+        .form-text { font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="form-container">
+        <div class="form-header text-center">
+            <h2 class="text-primary">Registrasi Data Pelatihan</h2>
+            <p class="text-muted">Kabupaten Donggala - Google Workspace for Education 2026</p>
+        </div>
+
+        <form id="dataForm">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label class="form-label">Nama Lengkap (Beserta Gelar)</label>
+                    <input type="text" name="Nama" class="form-control" placeholder="Contoh: Budi Santoso, S.Pd" required>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label">Nama Sekolah / Instansi</label>
+                    <input type="text" name="Sekolah" class="form-control" placeholder="Contoh: SMPN 10 Banawa Selatan" required>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label">Email Aktif</label>
+                    <input type="email" name="Email" class="form-control" placeholder="nama@email.com" required>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label">Nomor WhatsApp</label>
+                    <input type="tel" name="NoHP" class="form-control" placeholder="08xxxxxxx" required>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label">Kecamatan</label>
+                    <select name="Kecamatan" class="form-select" required>
+                        <option value="" selected disabled>Pilih Kecamatan...</option>
+                        <option value="Banawa">Banawa</option>
+                        <option value="Banawa Selatan">Banawa Selatan</option>
+                        <option value="Banawa Tengah">Banawa Tengah</option>
+                        <option value="Labuan">Labuan</option>
+                        <option value="Tanantovea">Tanantovea</option>
+                        <option value="Sindue">Sindue</option>
+                        </select>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label">Jabatan</label>
+                    <input type="text" name="Jabatan" class="form-control" placeholder="Contoh: Guru Kelas / Kepala Sekolah" required>
+                </div>
+
+                <div class="col-12">
+                    <label class="form-label">Alamat Lengkap</label>
+                    <textarea name="Alamat" class="form-control" rows="2" placeholder="Alamat domisili saat ini..." required></textarea>
+                </div>
+
+                <div class="col-12">
+                    <label class="form-label">Visi / Misi</label>
+                    <textarea name="VisiMisi" class="form-control" rows="2" placeholder="Apa tujuan atau motivasi Anda mengikuti pelatihan?" required></textarea>
+                </div>
+
+                <div class="col-12">
+                    <label class="form-label">Aktivitas / Materi</label>
+                    <textarea name="Aktivitas" class="form-control" rows="2" placeholder="Pisahkan dengan titik koma (;). Contoh: Pengenalan GMail; Google Drive Lanjut;"></textarea>
+                    <div class="form-text">Gunakan titik koma (;) untuk memisahkan daftar aktivitas.</div>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label">Upload Foto Profil</label>
+                    <input type="file" name="Foto" id="fotoFile" class="form-control" accept="image/*" required>
+                    <div class="form-text text-danger">*Foto akan otomatis tersimpan di Google Drive.</div>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label">Peran</label>
+                    <div class="mt-2">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="Peran" id="peserta" value="Peserta" checked>
+                            <label class="form-check-label" for="peserta">Peserta</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="Peran" id="pemateri" value="Pemateri">
+                            <label class="form-check-label" for="pemateri">Pemateri</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 text-center mt-4">
+                    <button type="submit" class="btn btn-primary shadow-sm" id="btnSubmit">KIRIM DATA SEKARANG</button>
+                    <div id="statusMessage" class="mt-3 fw-bold"></div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    // Catatan: Anda memerlukan Apps Script Backend (doPost) agar form ini berfungsi mengirim data.
+    const form = document.getElementById('dataForm');
+    const btnSubmit = document.getElementById('btnSubmit');
+    const statusMsg = document.getElementById('statusMessage');
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        btnSubmit.disabled = true;
+        btnSubmit.innerText = "Sedang Mengirim...";
+        statusMsg.innerText = "Mohon tunggu, sedang mengunggah data dan foto...";
+
+        const fileInput = document.getElementById('fotoFile');
+        const file = fileInput.files[0];
+        const reader = new FileReader();
+
+        // Mengubah file gambar menjadi Base64 agar bisa diproses oleh Apps Script
+        reader.onload = function() {
+            const base64Data = reader.result.split(',')[1];
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+            
+            // Tambahkan data file ke objek data
+            data.fileData = base64Data;
+            data.fileName = file.name;
+            data.fileMimeType = file.type;
+
+            // GANTI DENGAN URL WEB APP ANDA DARI APPS SCRIPT
+            const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyiUk3_UMcDT3pSHJTuiTa_PFfWPUnPm1PtJMQmLZOFl0UqkBRVzVvIIKYvySsA7PuH/exec";
+
+            fetch(WEB_APP_URL, {
+                method: 'POST',
+                mode: 'no-cors', // Penting jika tidak menggunakan CORS di Apps Script
+                body: JSON.stringify(data)
+            })
+            .then(() => {
+                statusMsg.style.color = "green";
+                statusMsg.innerText = "Berhasil! Data dan Foto telah disimpan.";
+                form.reset();
+            })
+            .catch(error => {
+                statusMsg.style.color = "red";
+                statusMsg.innerText = "Gagal mengirim. Silakan coba lagi.";
+                console.error(error);
+            })
+            .finally(() => {
+                btnSubmit.disabled = false;
+                btnSubmit.innerText = "KIRIM DATA SEKARANG";
+            });
+        };
+
+        if (file) {
+            reader.readAsDataURL(file);
+        }
+    });
+</script>
+
+</body>
+</html>

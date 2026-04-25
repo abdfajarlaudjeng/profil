@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DATA PELATIHAN GOOGLE WORKSPACE FOR EDUCATION 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Roboto', sans-serif; background-color: #f8f9fa; margin: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; padding: 20px; }
+        .kop-instansi { text-align: center; margin-bottom: 30px; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); width: 100%; max-width: 900px; box-sizing: border-box; }
+        .kop-instansi img { width: 75px; margin-bottom: 10px; }
+        .kop-instansi h2 { margin: 0; font-size: 1.1rem; color: #202124; text-transform: uppercase; }
+        .kop-instansi h3 { margin: 5px 0; font-size: 1.3rem; color: #1a73e8; }
+        .kop-instansi p { margin: 0; font-size: 0.85rem; color: #5f6368; font-style: italic; }
+
+        /* Tab System */
+        .tab-container { display: flex; width: 100%; max-width: 900px; background: #fff; border-radius: 12px; margin-bottom: 20px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .tab-button { flex: 1; padding: 15px; border: none; background: none; cursor: pointer; font-weight: 700; color: #5f6368; transition: 0.3s; border-bottom: 4px solid transparent; }
+        .tab-button.active { color: #1a73e8; border-bottom-color: #1a73e8; background: #e8f0fe; }
+
+        .stats-container { width: 100%; max-width: 900px; background: #e8f0fe; padding: 15px 25px; border-radius: 12px; margin-bottom: 15px; box-sizing: border-box; border-left: 6px solid #1a73e8; display: flex; align-items: center; gap: 20px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+        .stats-icon { font-size: 2.2rem; }
+        .stats-label { font-size: 0.8rem; color: #5f6368; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+        .stats-value { font-size: 1.6rem; font-weight: 800; color: #1a73e8; line-height: 1.2; }
+
+        .controls-container { width: 100%; max-width: 900px; margin-bottom: 25px; display: flex; flex-wrap: wrap; gap: 15px; background: white; padding: 15px; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); box-sizing: border-box; }
+        #searchInput { flex: 2; padding: 12px 20px; border-radius: 8px; border: 1px solid #dadce0; font-size: 1rem; outline: none; min-width: 250px; }
+        #filterKecamatan { flex: 1; padding: 12px; border-radius: 8px; border: 1px solid #dadce0; font-size: 1rem; background: white; cursor: pointer; min-width: 150px; }
+
+        #container-profil { display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; width: 100%; max-width: 1200px; }
+        .card { background-color: white; width: 100%; max-width: 340px; border-radius: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); overflow: hidden; text-align: center; position: relative; display: flex; flex-direction: column; transition: 0.3s; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.12); }
+        .header-google { padding: 20px 0 10px; }
+        .img-container { width: 160px; height: 160px; margin: 0 auto 15px; border-radius: 50%; border: 4px solid #f8f9fa; box-shadow: 0 2px 6px rgba(0,0,0,0.1); overflow: hidden; background-color: #fff; display: flex; justify-content: center; align-items: center; }
+        .profile-img { width: 100%; height: 100%; object-fit: cover; object-position: center 25%; transform: scale(0.8); border-radius: 50%; }
+        h1 { color: #202124; font-size: 1.15rem; margin: 10px 0 5px; padding: 0 15px; min-height: 3rem; display: flex; align-items: center; justify-content: center; line-height: 1.2; }
+        .jabatan { color: #1a73e8; font-weight: 700; font-size: 0.85rem; margin-bottom: 3px; }
+        .school { color: #5f6368; font-size: 0.8rem; font-weight: 500; text-transform: uppercase; padding: 0 15px; height: 2.4rem; overflow: hidden; }
+        .kec-label { display: inline-block; background: #f1f3f4; color: #3c4043; font-size: 0.7rem; padding: 4px 12px; border-radius: 12px; margin: 10px 0 20px; font-weight: bold; }
+        .menu-container { display: flex; flex-direction: column; gap: 8px; padding: 0 25px 25px; margin-top: auto; }
+        .menu-item { cursor: pointer; border: 1px solid #dadce0; padding: 10px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; background: #fff; color: #3c4043; transition: 0.2s; }
+        .menu-item:hover { background: #f8f9fa; border-color: #4285F4; color: #1a73e8; }
+        .pagination { margin: 40px 0; display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+        .pagination button { padding: 8px 16px; border-radius: 6px; border: 1px solid #dadce0; background: white; cursor: pointer; font-weight: bold; }
+        .pagination button.active { background: #4285F4; color: white; border-color: #4285F4; }
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); display: none; justify-content: center; align-items: center; z-index: 1000; padding: 20px; backdrop-filter: blur(3px); }
+        .sub-card { background: white; width: 100%; max-width: 400px; padding: 25px; border-radius: 15px; text-align: left; box-shadow: 0 10px 25px rgba(0,0,0,0.2); position: relative; }
+        .btn-close { color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; float: right; margin-top: 15px; font-weight: bold; }
+        .footer-line { height: 6px; display: flex; }
+        .f-blue { background: #4285F4; flex: 1; } .f-red { background: #EA4335; flex: 1; } .f-yellow { background: #FBBC05; flex: 1; } .f-green { background: #34A853; flex: 1; }
+        #loading { margin: 50px; color: #5f6368; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <div class="kop-instansi">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/Lambang_Kabupaten_Donggala_%282015-sekarang%29.png" alt="Logo">
+        <h2>Pemerintah Daerah Kabupaten Donggala</h2>
+        <h3>DINAS PENDIDIKAN PEMUDA DAN OLAHRAGA</h3>
+        <p>Alamat : Jl. Pue Mami No. Telp.(0457) 71461 Fax.71462 Donggala</p>
+    </div>
+
+    <h2 style="color: #3c4043; text-align: center; margin: 0 0 5px;">DATABASE GOOGLE WORKSPACE FOR EDUCATION 2026</h2>
+    <p style="margin-bottom: 25px; color: #5f6368; text-align: center;">Kabupaten Donggala - Level 0</p>
+
+    <div class="tab-container">
+        <button id="tabPeserta" class="tab-button active" onclick="switchTab('Peserta')">DATA PESERTA</button>
+        <button id="tabPemateri" class="tab-button" onclick="switchTab('Pemateri')">DATA PEMATERI</button>
+    </div>
+
+    <div class="stats-container">
+        <div id="statIcon" class="stats-icon">👥</div>
+        <div>
+            <div id="statLabel" class="stats-label">Jumlah Peserta Terdaftar</div>
+            <div id="totalGuru" class="stats-value">Menghitung...</div>
+        </div>
+    </div>
+
+    <div class="controls-container">
+        <input type="text" id="searchInput" placeholder="Cari Nama atau Sekolah..." onkeyup="updateFilter()">
+        <select id="filterKecamatan" onchange="updateFilter()">
+            <option value="">Semua Kecamatan</option>
+        </select>
+    </div>
+
+    <div id="loading">Menghubungkan Database</div>
+    <div id="container-profil"></div>
+    <div class="pagination" id="paginationControls"></div>
+
+    <script>
+        // Gunakan link CSV hasil Publish to Web dari Spreadsheet Anda
+        const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSKpszcT3PzetT5jBaRk6avZIWmmmZng7e2iYsCzkhc-ccNqnh1RcyFWdR48lffb46jukasxjcMnTCX/pub?gid=0&single=true&output=csv";
+        
+        let allData = [];
+        let filteredData = [];
+        let activeTab = 'Peserta';
+        let currentPage = 1;
+        const rowsPerPage = 9;
+        const googleColors = ['#4285F4', '#EA4335', '#FBBC05', '#34A853'];
+
+        function formatDriveLink(link) {
+            if (!link) return "";
+            link = link.trim();
+            if (link.includes('drive.google.com')) {
+                let id = "";
+                if (link.includes('id=')) {
+                    id = link.split('id=')[1].split('&')[0];
+                } else if (link.includes('/d/')) {
+                    id = link.split('/d/')[1].split('/')[0];
+                }
+                return `https://drive.google.com/uc?export=view&id=${id}`;
+            }
+            return link;
+        }
+
+        function parseCSV(text) {
+            const result = [];
+            let row = [];
+            let col = "";
+            let inQuotes = false;
+            for (let i = 0; i < text.length; i++) {
+                let char = text[i];
+                let nextChar = text[i+1];
+                if (char === '"' && inQuotes && nextChar === '"') {
+                    col += '"'; i++;
+                } else if (char === '"') {
+                    inQuotes = !inQuotes;
+                } else if (char === ',' && !inQuotes) {
+                    row.push(col); col = "";
+                } else if (char === '\r' || char === '\n') {
+                    if (inQuotes) {
+                        col += char;
+                    } else {
+                        if (col !== "" || row.length > 0) {
+                            row.push(col);
+                            result.push(row);
+                        }
+                        row = []; col = "";
+                    }
+                } else {
+                    col += char;
+                }
+            }
+            if (col !== "" || row.length > 0) { row.push(col); result.push(row); }
+            return result;
+        }
+
+        async function loadSheetsData() {
+            try {
+                const response = await fetch(sheetURL);
+                const csvText = await response.text();
+                const dataArray = parseCSV(csvText).slice(1);
+
+                // Mapping sesuai urutan kolom baru Anda
+                allData = dataArray.map(cols => ({
+                    nama: (cols[0] || "").trim(),
+                    sekolah: (cols[1] || "").trim(),
+                    email: (cols[2] || "").trim(),
+                    alamat: (cols[3] || "").trim(),
+                    kecamatan: (cols[4] || "").trim(),
+                    hp: (cols[5] || "").trim(),
+                    jabatan: (cols[6] || "").trim(),
+                    misi: (cols[7] || "").trim(),
+                    aktivitas: (cols[8] || "").trim(),
+                    foto: (cols[9] || "").trim(),
+                    peran: (cols[10] || "Peserta").trim() // Kolom ke-11
+                })).filter(item => item.nama !== "");
+
+                populateKecamatan(allData);
+                document.getElementById("loading").style.display = "none";
+                switchTab('Peserta'); 
+            } catch (e) {
+                document.getElementById("loading").innerText = "Gagal memuat data.";
+            }
+        }
+
+        function switchTab(peran) {
+            activeTab = peran;
+            currentPage = 1;
+
+            // Update Tab UI
+            document.getElementById('tabPeserta').classList.toggle('active', peran === 'Peserta');
+            document.getElementById('tabPemateri').classList.toggle('active', peran === 'Pemateri');
+
+            // Update Stats UI
+            if(peran === 'Peserta') {
+                document.getElementById('statIcon').innerText = "👥";
+                document.getElementById('statLabel').innerText = "Jumlah Peserta Terdaftar";
+            } else {
+                document.getElementById('statIcon').innerText = "🎓";
+                document.getElementById('statLabel').innerText = "Jumlah Pemateri/Narasumber";
+            }
+
+            updateFilter();
+        }
+
+        function populateKecamatan(data) {
+            const select = document.getElementById("filterKecamatan");
+            const listKecamatan = [...new Set(data.map(d => d.kecamatan))].sort();
+            listKecamatan.forEach(kec => {
+                if(kec) {
+                    const opt = document.createElement("option");
+                    opt.value = kec; opt.innerText = kec;
+                    select.appendChild(opt);
+                }
+            });
+        }
+
+        function updateFilter() {
+            const searchVal = document.getElementById("searchInput").value.toLowerCase();
+            const kecVal = document.getElementById("filterKecamatan").value;
+
+            filteredData = allData.filter(d => {
+                const matchTab = d.peran.toLowerCase() === activeTab.toLowerCase();
+                const matchSearch = d.nama.toLowerCase().includes(searchVal) || d.sekolah.toLowerCase().includes(searchVal);
+                const matchKec = kecVal === "" || d.kecamatan === kecVal;
+                return matchTab && matchSearch && matchKec;
+            });
+
+            document.getElementById("totalGuru").innerText = filteredData.length + " Orang";
+            renderCards();
+        }
+
+        function renderCards() {
+            const container = document.getElementById("container-profil");
+            container.innerHTML = "";
+            const start = (currentPage - 1) * rowsPerPage;
+            const end = start + rowsPerPage;
+            const currentItems = filteredData.slice(start, end);
+
+            if (currentItems.length === 0) {
+                container.innerHTML = `<div style="margin:50px; color:#5f6368">Data ${activeTab} tidak ditemukan.</div>`;
+                renderPagination(0);
+                return;
+            }
+
+            currentItems.forEach((data, index) => {
+                const globalIndex = start + index;
+                const aktivitasHTML = data.aktivitas.split(";").map(a => `• ${a.trim()}`).join("<br>");
+                const finalImg = formatDriveLink(data.foto) || `https://ui-avatars.com/api/?name=${data.nama}&background=random&size=200`;
+                const borderColor = googleColors[globalIndex % googleColors.length];
+
+                const cardHTML = `
+                    <div class="card">
+                        <div class="header-google"><img src="https://upload.wikimedia.org/wikipedia/commons/3/32/Google_for_Education_logo.svg" width="80"></div>
+                        <div class="img-container" style="border-color: ${borderColor}">
+                            <img src="${finalImg}" class="profile-img" onerror="this.src='https://ui-avatars.com/api/?name=${data.nama}&background=random&size=200'">
+                        </div>
+                        <h1>${data.nama}</h1>
+                        <div class="jabatan">${data.jabatan}</div>
+                        <div class="school">${data.sekolah}</div>
+                        <div><span class="kec-label">KEC. ${data.kecamatan}</span></div>
+                        <div class="menu-container">
+                            <div class="menu-item" onclick="openModal('m-profil${globalIndex}')">👤 Profil & Visi</div>
+                            <div class="menu-item" onclick="openModal('m-aktif${globalIndex}')">🕒 Aktivitas</div>
+                            <div class="menu-item" onclick="openModal('m-kontak${globalIndex}')">📞 Kontak</div>
+                        </div>
+                        <div class="footer-line">
+                            <div class="f-blue"></div><div class="f-red"></div><div class="f-yellow"></div><div class="f-green"></div>
+                        </div>
+                        <div id="m-profil${globalIndex}" class="modal-overlay" onclick="closeModal(event, 'm-profil${globalIndex}')">
+                            <div class="sub-card">
+                                <h3 style="color:${borderColor}">Detail ${activeTab}</h3>
+                                <p><strong>Instansi:</strong> ${data.sekolah}</p>
+                                <p><strong>Jabatan:</strong> ${data.jabatan}</p>
+                                <p><strong>Kecamatan:</strong> ${data.kecamatan}</p>
+                                <p><strong>Visi/Misi:</strong> ${data.misi}</p>
+                                <button class="btn-close" style="background:${borderColor}" onclick="closeModalDirect('m-profil${globalIndex}')">Tutup</button>
+                            </div>
+                        </div>
+                        <div id="m-aktif${globalIndex}" class="modal-overlay" onclick="closeModal(event, 'm-aktif${globalIndex}')">
+                            <div class="sub-card">
+                                <h3 style="color:${borderColor}">Aktivitas Pelatihan</h3>
+                                <p>${aktivitasHTML || "Belum ada aktivitas terdaftar."}</p>
+                                <button class="btn-close" style="background:${borderColor}" onclick="closeModalDirect('m-aktif${globalIndex}')">Tutup</button>
+                            </div>
+                        </div>
+                        <div id="m-kontak${globalIndex}" class="modal-overlay" onclick="closeModal(event, 'm-kontak${globalIndex}')">
+                            <div class="sub-card">
+                                <h3 style="color:${borderColor}">Informasi Kontak</h3>
+                                <p><strong>Email:</strong> ${data.email}</p>
+                                <p><strong>WhatsApp:</strong> <a href="https://wa.me/${data.hp.replace(/[^0-9]/g, '')}" target="_blank">${data.hp}</a></p>
+                                <p><strong>Alamat:</strong> ${data.alamat}</p>
+                                <button class="btn-close" style="background:${borderColor}" onclick="closeModalDirect('m-kontak${globalIndex}')">Tutup</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += cardHTML;
+            });
+            renderPagination(filteredData.length);
+        }
+
+        function renderPagination(total) {
+            const wrapper = document.getElementById("paginationControls");
+            wrapper.innerHTML = "";
+            const pageCount = Math.ceil(total / rowsPerPage);
+            if (pageCount <= 1) return;
+            for (let i = 1; i <= pageCount; i++) {
+                const btn = document.createElement("button");
+                btn.innerText = i;
+                if (i === currentPage) btn.classList.add("active");
+                btn.onclick = () => { currentPage = i; renderCards(); window.scrollTo({top: 0, behavior: 'smooth'}); };
+                wrapper.appendChild(btn);
+            }
+        }
+
+        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+        function closeModalDirect(id) { document.getElementById(id).style.display = 'none'; }
+        function closeModal(e, id) { if (e.target === document.getElementById(id)) closeModalDirect(id); }
+
+        loadSheetsData();
+    </script>
+</body>
+</html>

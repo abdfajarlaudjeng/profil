@@ -120,62 +120,51 @@
 </div>
 
 <script>
-    // Catatan: Anda memerlukan Apps Script Backend (doPost) agar form ini berfungsi mengirim data.
     const form = document.getElementById('dataForm');
     const btnSubmit = document.getElementById('btnSubmit');
     const statusMsg = document.getElementById('statusMessage');
 
     form.addEventListener('submit', function(e) {
         e.preventDefault();
-        
         btnSubmit.disabled = true;
         btnSubmit.innerText = "Sedang Mengirim...";
-        statusMsg.innerText = "Mohon tunggu, sedang mengunggah data dan foto...";
 
         const fileInput = document.getElementById('fotoFile');
         const file = fileInput.files[0];
         const reader = new FileReader();
 
-        // Mengubah file gambar menjadi Base64 agar bisa diproses oleh Apps Script
         reader.onload = function() {
             const base64Data = reader.result.split(',')[1];
             const formData = new FormData(form);
             const data = Object.fromEntries(formData.entries());
-            
-            // Tambahkan data file ke objek data
             data.fileData = base64Data;
             data.fileName = file.name;
             data.fileMimeType = file.type;
 
-            // GANTI DENGAN URL WEB APP ANDA DARI APPS SCRIPT
-            const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyh4XJ0vPD-cXLd7rnZeOy8CL3YcB3_cxbyfYm8RC3PhrcsgRcMuEwmpzYfz0APQUf9/exec";
+            // GANTI DENGAN URL WEB APP ANDA
+            const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxESPT9ugDeXYBfL2csaifNMQmQPeSygcMlys3_e4tx_IhylZH718DLwLd5LVKbgi_i/exec";
 
             fetch(WEB_APP_URL, {
                 method: 'POST',
-                mode: 'no-cors', // Penting jika tidak menggunakan CORS di Apps Script
+                mode: 'no-cors',
                 body: JSON.stringify(data)
             })
             .then(() => {
                 statusMsg.style.color = "green";
-                statusMsg.innerText = "Berhasil! Data dan Foto telah disimpan.";
+                statusMsg.innerText = "Berhasil! Data telah disimpan.";
                 form.reset();
             })
-            .catch(error => {
+            .catch(() => {
                 statusMsg.style.color = "red";
-                statusMsg.innerText = "Gagal mengirim. Silakan coba lagi.";
-                console.error(error);
+                statusMsg.innerText = "Gagal mengirim data.";
             })
             .finally(() => {
                 btnSubmit.disabled = false;
                 btnSubmit.innerText = "KIRIM DATA SEKARANG";
             });
         };
-
-        if (file) {
-            reader.readAsDataURL(file);
-        }
+        reader.readAsDataURL(file);
     });
 </script>
-
 </body>
 </html>
